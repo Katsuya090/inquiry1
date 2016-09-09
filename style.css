@@ -1,0 +1,58 @@
+#myform {
+  font-size: 0.875px;
+  width: 500px;
+}
+
+#myform label {
+  font-size: 0.875em;
+}
+
+#myform table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+#myform th {
+  text-align: left;
+  width: 150px;
+  padding: 8px;
+  background-color: #D3D3D3;
+  border: solid 1px #aaa;
+}
+
+#myform td {
+  padding: 8px;
+  border:solid 1px #aaa;
+}
+
+#myform p {
+  text-align: center;
+}
+
+.inquiry {
+  font-weight: bold;
+}
+.need {
+  color: red;
+}
+.botton1 {
+    font-size: 1.4em;
+    font-weight: bold;
+    padding: 10px 30px;
+    background-color: #A9A9A9;
+    color: #fff;
+    border-style: none;
+}
+
+.botton2 {
+    font-size: 1.4em;
+    font-weight: bold;
+    padding: 10px 30px;
+    background-color: #248;
+    color: #fff;
+    border-style: none;
+}
+
+.err {
+  color: red;
+}

@@ -8,6 +8,8 @@
 <body>
 
 <?php
+  var_dump($_POST);
+
   error_reporting(E_ALL & ~E_NOTICE);
   $sort = array(
   1  => "商品について",
@@ -30,33 +32,23 @@ if ($name =='')
 {
   $err1 = 'お名前が入力されていません。';
 }
-else
-{
-  $name;
 
-}
 
 if ($mailaddress == ''){
   $err2 = 'メールアドレスが入力されていません。';
 }
-else {
-  $mailaddress;
-}
-if (count($sort["$sorts"]) == ''){
+
+if (!isset($sort["$sorts"])){
   $err3 = '種類が入力されていません。';
 }
-else {
-  $sort["$sorts"];
-}
+
 
 if ($question == '') {
   $err4 = 'お問い合わせが入力されていません。';
 }
-else {
-  $question;
-}
+
 ?>
-<?php if ($name == '' || $mailaddress == '' || $sort == '' || $question == ''): ?>
+<?php if ($name == '' || $mailaddress == '' || !isset($sort["$sorts"]) || $question == ''): ?>
 <p>お問い合わせ</p>
 <form action="inquiry_check.php" method="post" id="myform">
 <table>
@@ -77,11 +69,16 @@ else {
 <tr>
 <th><label for="sort">種類<span class="need">&nbsp;&nbsp;(必須)</span></label></th>
 <td><select name="sort">
-          <option value="sort">選択してください</option>
-          <?php
+          <option value="">選択してください</option>
+    <?php
     foreach($sort as $sortkey => $sort) {
+      if ($sorts == $sortkey){
+        echo '<option value="' . $sortkey . '" selected="selected">' . $sort . '</option>';
+      }
+      else{
       echo ('<option value="' . $sortkey .'">' . $sort .'</option>');
     }
+  }
     ?>
 </select>
 <p class="err"><?php echo $err3; ?></p>
@@ -90,7 +87,7 @@ else {
 <tr>
 <th><label for="com">お問い合わせ内容<span class="need">&nbsp;&nbsp;(必須)</span></label></th>
 <td>
-  <textarea id="com" name="question" cols="40" rows="8" value="<?php echo $question ?>"></textarea>
+  <textarea id="com" name="question" cols="40" rows="8"><?php echo $question ?></textarea>
   <p class="err"><?php echo $err4; ?></p>
 </td>
 </tr>
@@ -123,7 +120,8 @@ else {
 <td><?php echo $question ?></td>
 </tr>
 </table>
-<form method="post" action="thanks.php">';
+</form>
+<form method="post" action="thanks.php">
     <input name="name" type="hidden" value="<?php echo $name ?>">
     <input name="mailadress" type="hidden" value="<?php echo $mailaddress ?>">
     <input name="sort" type="hidden" value="<?php echo $sort["$sorts"] ?>">

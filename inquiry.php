@@ -30,7 +30,7 @@ $sort = array(
 <tr>
 <th><label for="sort">種類<span class="need">&nbsp;&nbsp;(必須)</span></label></th>
 <td><select name="sort">
-          <option value="sort">選択してください</option>
+          <option value="">選択してください</option>
           <?php
     foreach($sort as $sortkey => $sort) {
       echo ('<option value="' . $sortkey .'">' . $sort .'</option>');

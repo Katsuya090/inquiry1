@@ -8,7 +8,8 @@
 <body>
 
 <?php
-  var_dump($_POST);
+  // var_dump($_POST);
+  require_once('functions.php');
 
   error_reporting(E_ALL & ~E_NOTICE);
   $sort = array(
@@ -22,6 +23,7 @@
   $mailaddress = $_POST['mailaddress'];
   $sorts = $_POST["sort"];
   $question = $_POST['question'];
+
 
   $name = htmlspecialchars($name);
   $mailaddress = htmlspecialchars($mailaddress);
@@ -48,7 +50,7 @@ if ($question == '') {
 }
 
 ?>
-<?php if ($name == '' || $mailaddress == '' || !isset($sort["$sorts"]) || $question == ''): ?>
+<?php if ($name == '' || $mailaddress == '' || !isset($sort[$sorts]) || $question == ''): ?>
 <p>お問い合わせ</p>
 <form action="inquiry_check.php" method="post" id="myform">
 <table>
@@ -123,7 +125,7 @@ if ($question == '') {
 </form>
 <form method="post" action="thanks.php">
     <input name="name" type="hidden" value="<?php echo $name ?>">
-    <input name="mailadress" type="hidden" value="<?php echo $mailaddress ?>">
+    <input name="mailaddress" type="hidden" value="<?php echo $mailaddress ?>">
     <input name="sort" type="hidden" value="<?php echo $sort["$sorts"] ?>">
     <input name="question" type="hidden" value="<?php echo $question ?>">
 <p>

@@ -1,21 +1,41 @@
 <?php
-// var_dump($_POST);
-//   $name = $_POST['name'];
-//   $mailadress = $_POST['mailadress'];
-//   // $sorts = $_POST[$sort["$sorts"]];
-//   $question = $_POST['question'];
-
-  $fileName = "data.csv";
-
-// echo 'お問い合わせ<br>';
-// echo 'お問い合わせありがとうございました。';
-
-// $data = $name . $mailadress . $sorts . $question;
+require_once('functions.php');
+var_dump($_POST);
+  $sort = array(
+  1  => "商品について",
+  2  => "お支払いについて",
+  3 => "当サイトについて",
+  4 => "その他",
+);
 
 
-    $fp = fopen($fileName, "a");
-    fputcsv($fp, $_POST);
-    fclose($fp);
+  $name = $_POST['name'];
+  $mailaddress = $_POST['mailaddress'];
+  $sorts = $_POST["sort"];
+  $question = $_POST['question'];
+
+
+  $name = htmlspecialchars($name);
+  $mailaddress = htmlspecialchars($mailaddress);
+  $question = htmlspecialchars($question);
+
+  $dbh = connectDb();
+
+  $sql = "insert into inquiry (name, mailaddress, kind, question, createdAt) values
+          (:name, :mailaddress, :kind, :question, now())";
+
+  $stmt = $dbh->prepare($sql);
+  $stmt->bindParam(":name", $name);
+  $stmt->bindParam(":mailaddress", $mailaddress);
+  $stmt->bindParam(":kind", $sorts);
+  $stmt->bindParam(":question", $question);
+
+  $stmt->execute();
+
+  echo '成功しました';
+
+
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -25,6 +45,10 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+
+
+
 <p class="inquiry">お問い合わせ</p>
 <p>お問い合わせありがとうございました。</p>
 </body>

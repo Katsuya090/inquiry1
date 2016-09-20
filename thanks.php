@@ -15,9 +15,6 @@ var_dump($_POST);
   $question = $_POST['question'];
 
 
-  $name = htmlspecialchars($name);
-  $mailaddress = htmlspecialchars($mailaddress);
-  $question = htmlspecialchars($question);
 
   $dbh = connectDb();
 
